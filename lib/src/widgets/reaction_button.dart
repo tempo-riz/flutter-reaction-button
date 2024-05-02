@@ -14,6 +14,7 @@ class ReactionButton<T> extends StatefulWidget {
     this.boxColor = Colors.white,
     this.boxElevation = 5,
     this.boxRadius = 50,
+    this.boxOffset = Offset.zero,
     this.isChecked = false,
     this.itemsSpacing = 8,
     this.itemScale = .3,
@@ -47,6 +48,9 @@ class ReactionButton<T> extends StatefulWidget {
 
   /// Reactions box radius [default = 50]
   final double boxRadius;
+
+  /// Reactions box offset [default = Offset.zero]
+  final Offset boxOffset;
 
   /// Reactions box visibility duration [default = 200 milliseconds]
   final Duration boxAnimationDuration;
@@ -118,7 +122,7 @@ class _ReactionButtonState<T> extends State<ReactionButton<T>> {
     _overlayEntry = OverlayEntry(
       builder: (context) {
         return ReactionsBox<T>(
-          offset: offset ?? _globalKey.offset,
+          offset: (offset ?? _globalKey.offset) + widget.boxOffset,
           itemSize: widget.itemSize,
           reactions: widget.reactions,
           color: widget.boxColor,
